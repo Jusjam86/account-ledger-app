@@ -9,7 +9,7 @@ public class transactions {
     private String vendor;
     private double amount;
 
-
+    // Constructor
     public transactions(String date, String time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
@@ -18,7 +18,7 @@ public class transactions {
         this.amount = amount;
 
     }
-
+    // Getters and Setters
     public String getDate() {
         return date;
     }
@@ -48,5 +48,15 @@ public class transactions {
     }
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    // Methods:
+    // Method that converts the transaction into a single line of text for the csv file
+    public String toCSVLine() {
+        return date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
+    }
+    // Method that organizes the transaction in a readable format on screen
+    public void printTransaction() {
+        System.out.println(date + " " + time + " | " + description + " | " + vendor + " | $" + amount);
     }
 }

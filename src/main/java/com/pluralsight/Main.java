@@ -19,7 +19,7 @@ public class Main {
 
     }
 
-    static void displayHomeScreen() {
+    public static void displayHomeScreen() {
 
         while(true) {
 
