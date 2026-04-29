@@ -39,10 +39,10 @@ public class Main {
             switch (choice) {
 
                 case "D":
-                    displayDepositScreen();
+                    TransactionManager.depositScreen(userInput);
                     break;
                 case "P":
-                    displayPaymentScreen();
+                    TransactionManager.paymentScreen(userInput);
                     break;
                 case "L":
                     displayLedgerScreen();
@@ -59,41 +59,6 @@ public class Main {
             return;
         }
 
-    }
-    static void displayDepositScreen() {
-        while(true) {
-
-            System.out.println();
-            System.out.println("Please enter your deposit information");
-            System.out.println("------------------------------------------------------");
-            System.out.println("Amount: ");
-            double amount = Double.parseDouble(userInput.nextLine());
-            System.out.println("Description: ");
-            String description = userInput.nextLine().strip();
-            System.out.println("Vendor: ");
-            String vendor = userInput.nextLine().strip();
-            System.out.println("Please enter date in MM/DD/YYYY format: ");
-            String dateInput = userInput.nextLine().strip();
-
-            // fixes formatting of the date, makes it American standard
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            LocalDate dateOfTransaction = LocalDate.parse(dateInput, formatter);
-
-            // add timestamp without user input
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
-            String timeStamp = now.format(formatter2);
-
-            // calls logTransactions method
-            // plugs in user input variables above
-            // the user inputs are recorded onto the .csv using transactions' initial variables
-            new transactions(dateInput, timeStamp, description, vendor, amount);
-
-            System.out.println();
-            System.out.println("Deposit Recorded");
-            displayHomeScreen();
-
-        }
     }
 
     static void displayPaymentScreen() {
