@@ -50,7 +50,6 @@ public class transactions {
         this.amount = amount;
     }
 
-    // Methods:
     // Method that converts the transaction into a single line of text for the csv file
     public String toCSVLine() {
         return date + "|" + time + "|" + description + "|" + vendor + "|" + amount;

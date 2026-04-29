@@ -12,10 +12,8 @@ public class Main {
 
     static void main() {
 
+        TransactionManager.loadTransactions();
         displayHomeScreen();
-        displayPaymentScreen();
-        displayLedgerScreen();
-        displayReportScreen();
 
     }
 
@@ -45,14 +43,14 @@ public class Main {
                     TransactionManager.paymentScreen(userInput);
                     break;
                 case "L":
-                    displayLedgerScreen();
+                    LedgerScreen.showLedgerScreen(userInput);
                     break;
                 case "X":
                     System.out.println("Exiting, come back anytime!");
-                    // return exits the loop and the method; in this case, this ends the application
                     break;
 
                 default:
+                    System.out.println();
                     System.out.println("Invalid Choice, Try again");
                     displayHomeScreen();
             }
@@ -61,21 +59,4 @@ public class Main {
 
     }
 
-    static void displayPaymentScreen() {
-        while(true) {
-            System.out.println();
-        }
-    }
-
-    static void displayLedgerScreen() {
-        while(true) {
-            System.out.println();
-        }
-    }
-
-    static void displayReportScreen() {
-        while(true) {
-            System.out.println();
-        }
-    }
 }

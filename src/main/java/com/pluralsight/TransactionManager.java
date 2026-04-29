@@ -19,7 +19,7 @@ public class TransactionManager {
     static ArrayList<transactions> transactions = new ArrayList<>();
 
     // loads all transactions from csv file
-    public void loadTransactions() {
+    static void loadTransactions() {
 
         // create file object pointing to csv file
         File file = new File(FILE_NAME);
@@ -82,11 +82,11 @@ public class TransactionManager {
 
         System.out.println("\n===== ADD DEPOSIT =====");
 
-        // Get today's date and current time automatically
+        // this gets today's date and current time automatically
         String date = LocalDate.now().toString();                    // Example: "2024-01-15"
         String time = LocalTime.now().toString().substring(0, 8);    // Example: "10:13:25"
 
-        // Ask the user to type in the description and vendor
+        // ask user for input about description, vendor, and amount
         System.out.print("Enter description: ");
         String description = userInput.nextLine();
 
@@ -96,12 +96,12 @@ public class TransactionManager {
         System.out.print("Enter deposit amount: ");
         double amount = Double.parseDouble(userInput.nextLine()); // Convert text to a number
 
-        // Deposits are always positive, so make sure it's positive
+        // deposits are positive
         if (amount < 0) {
-            amount = amount * -1; // Flip negative to positive
+            amount = amount * -1; // flips negative to a positive
         }
 
-        // Create the transaction and add it to the list and the file
+        // create the transaction and add it to the list and the file
         transactions t = new transactions(date, time, description, vendor, amount);
         transactions.add(t);
         saveTransactions(t);
