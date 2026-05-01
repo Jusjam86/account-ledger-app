@@ -9,6 +9,7 @@ import java.util.*;
 import java.time.*;
 import java.util.Scanner;
 
+// suggested by IntelliJ to add this and it works
 import static com.pluralsight.Main.displayHomeScreen;
 
 public class TransactionManager {

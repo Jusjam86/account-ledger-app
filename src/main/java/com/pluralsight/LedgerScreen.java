@@ -5,6 +5,7 @@ package com.pluralsight;
 
 import java.util.*;
 
+// suggested by IntelliJ to add this and it works
 import static com.pluralsight.Main.displayHomeScreen;
 
 public class LedgerScreen {

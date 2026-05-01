@@ -6,6 +6,7 @@ package com.pluralsight;
 import java.time.*;
 import java.util.*;
 
+// suggested by IntelliJ to add this and it works
 import static com.pluralsight.LedgerScreen.showLedgerScreen;
 
 public class ReportsScreen {
@@ -125,7 +126,7 @@ public class ReportsScreen {
         for (transactions t : TransactionManager.transactions) {
             LocalDate transDate = LocalDate.parse(t.getDate());
 
-            // Only check if the year matches — this covers all months up to today
+            // only check if the year matches — this covers all months up to today
             if (transDate.getYear() == currentYear) {
                 results.add(t);
             }
@@ -139,7 +140,7 @@ public class ReportsScreen {
 
         System.out.println("\n===== PREVIOUS YEAR =====");
 
-        int lastYear = LocalDate.now().getYear() - 1; // Subtract 1 from current year
+        int lastYear = LocalDate.now().getYear() - 1; // subtract 1 from current year
 
         ArrayList<transactions> results = new ArrayList<>();
 
@@ -164,7 +165,7 @@ public class ReportsScreen {
         ArrayList<transactions> results = new ArrayList<>();
 
         for (transactions t : TransactionManager.transactions) {
-            // equalsIgnoreCase means "Amazon" and "amazon" are treated the same
+
             if (t.getVendor().toLowerCase().contains(vendorName)) {
                 results.add(t);
             }
@@ -173,7 +174,9 @@ public class ReportsScreen {
         if (results.isEmpty()) {
             System.out.println("No transactions found for vendor: " + vendorName);
         } else {
+
             LedgerScreen.printEntries(results);
         }
     }
+
 }
