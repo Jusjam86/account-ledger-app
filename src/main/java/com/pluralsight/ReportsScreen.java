@@ -58,7 +58,7 @@ public class ReportsScreen {
 
                 default:
                     System.out.println("Invalid option. Please try again.");
-                    showLedgerScreen(userInput);
+                    showReportsScreen(userInput);
             }
             return;
         }
@@ -165,7 +165,7 @@ public class ReportsScreen {
 
         for (transactions t : TransactionManager.transactions) {
             // equalsIgnoreCase means "Amazon" and "amazon" are treated the same
-            if (t.getVendor().equalsIgnoreCase(vendorName)) {
+            if (t.getVendor().toLowerCase().contains(vendorName)) {
                 results.add(t);
             }
         }
