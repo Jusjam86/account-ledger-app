@@ -4,13 +4,14 @@ package com.pluralsight;
 // I'm storing the deposits and payments here as well until I deem another class is required for it
 
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.time.*;
 import java.util.Scanner;
 
-public class TransactionManager {
+import static com.pluralsight.Main.displayHomeScreen;
 
-    static Scanner userInput = new Scanner(System.in);
+public class TransactionManager {
 
     // the file where all transactions will be stored
     static String FILE_NAME = "transactions.csv";
@@ -26,7 +27,9 @@ public class TransactionManager {
 
         // if the file doesn't exist yet, there's nothing to load
         if (!file.exists()) {
+            System.out.println();
             System.out.println("No existing transaction file found.");
+            System.out.println();
             return;
         }
 
@@ -76,66 +79,114 @@ public class TransactionManager {
 
     }
 
-    // Adding deposit section here
-    // ask user for deposit info and save it
+    // method for date
+    public static String getDateInput(Scanner userInput) {
+
+        String date;
+
+        while (true) {
+
+            System.out.print("Enter date (yyyy-MM-dd): ");
+
+            try {
+                String input = userInput.nextLine();
+                LocalDate.parse(input);
+
+                date = input;  // when input is valid, save it
+                break;
+
+            } catch (Exception e) {
+
+                System.out.println();
+                System.out.println("Invalid date format. Please use yyyy-MM-dd");
+                System.out.println();
+            }
+        }
+
+        return date;
+    }
+
+    // note: adding deposit section here
+    // ---------------------------------- ask user for deposit info and save it ----------------------------------------
     public static void depositScreen (Scanner userInput) {
 
         System.out.println("\n===== ADD DEPOSIT =====");
 
-        // this gets today's date and current time automatically
-        String date = LocalDate.now().toString();                    // Example: "2024-01-15"
-        String time = LocalTime.now().toString().substring(0, 8);    // Example: "10:13:25"
-
-        // ask user for input about description, vendor, and amount
-        System.out.print("Enter description: ");
-        String description = userInput.nextLine();
-
-        System.out.print("Enter name of vendor: ");
-        String vendor = userInput.nextLine();
-
-        System.out.print("Enter deposit amount: ");
-        double amount = Double.parseDouble(userInput.nextLine()); // Convert text to a number
-
-        // deposits are positive
-        if (amount < 0) {
-            amount = amount * -1; // flips negative to a positive
-        }
-
-        // create the transaction and add it to the list and the file
-        transactions t = new transactions(date, time, description, vendor, amount);
-        transactions.add(t);
-        saveTransactions(t);
-
-        System.out.println("Deposit successfully added!");
-
-    }
-
-    // ask user for payment info and save it
-    public static void paymentScreen (Scanner userInput) {
-        System.out.println("\n===== MAKE PAYMENT =====");
-
-        String date = LocalDate.now().toString();
+        String date = getDateInput(userInput);
         String time = LocalTime.now().toString().substring(0, 8);
 
         System.out.print("Enter description: ");
         String description = userInput.nextLine();
 
-        System.out.print("Enter name of vendor: ");
+        System.out.print("Enter vendor: ");
         String vendor = userInput.nextLine();
 
-        System.out.print("Enter deposit amount: ");
-        double amount = Double.parseDouble(userInput.nextLine());
+        while (true) {
 
-        // payments are negative
-        if (amount < 0) {
-            amount = amount * -1; // flips positive to a negative
+            System.out.print("Enter amount: ");
+
+            try {
+                double amount = Double.parseDouble(userInput.nextLine());
+
+                if (amount < 0) {
+                    amount = amount * -1; // flips negative to positive
+                }
+
+                transactions t = new transactions(date, time, description, vendor, amount);
+                transactions.add(t);
+                saveTransactions(t);
+
+                System.out.println();
+                System.out.println("Deposit successfully added");
+                displayHomeScreen();
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a number like 24 or 17.38");
+            }
         }
+    }
 
-        transactions t = new transactions(date, time, description, vendor, amount);
-        transactions.add(t);
-        saveTransactions(t);
+    // note: add payment section here
+    // ---------------------------------- ask user for payment info and save it ----------------------------------------
+    public static void paymentScreen (Scanner userInput) {
 
-        System.out.println("Payment successfully added!");
+        System.out.println("\n===== MAKE PAYMENT =====");
+
+        String date = getDateInput(userInput);
+        String time = LocalTime.now().toString().substring(0, 8);
+
+        System.out.print("Enter description: ");
+        String description = userInput.nextLine();
+
+        System.out.print("Enter vendor: ");
+        String vendor = userInput.nextLine();
+
+        while (true) {
+
+            System.out.print("Enter amount: ");
+
+            try {
+                double amount = Double.parseDouble(userInput.nextLine());
+
+                if (amount > 0) {
+                    amount = amount * -1; // flips positive to negative
+                }
+
+                transactions t = new transactions(date, time, description, vendor, amount);
+                transactions.add(t);
+                saveTransactions(t);
+
+                System.out.println();
+                System.out.println("Payment successfully recorded");
+                displayHomeScreen();
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a number like 24 or 17.38");
+
+            }
+        }
     }
 
 }

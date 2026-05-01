@@ -52,7 +52,10 @@ public class LedgerScreen {
                     break;
 
                 default:
+                    System.out.println();
                     System.out.println("Invalid option. Please try again.");
+                    System.out.println();
+                    showLedgerScreen(userInput);
 
             }
             return;
@@ -74,7 +77,7 @@ public class LedgerScreen {
             }
         }
 
-        printEntries(deposits); // Print the filtered list
+        printEntries(deposits); // print the filtered list
     }
 
     // shows payments (negative amounts)
@@ -98,7 +101,9 @@ public class LedgerScreen {
     public static void printEntries(ArrayList<transactions> list) {
 
         if (list.isEmpty()) {
+            System.out.println();
             System.out.println("No entries to display.");
+            System.out.println();
             return;
         }
 

@@ -29,22 +29,27 @@ public class ReportsScreen {
 
                 case "1":
                     monthToDate();
+                    showReportsScreen(userInput);
                     break;
 
                 case "2":
                     previousMonth();
+                    showReportsScreen(userInput);
                     break;
 
                 case "3":
                     yearToDate();
+                    showReportsScreen(userInput);
                     break;
 
                 case "4":
                     previousYear();
+                    showReportsScreen(userInput);
                     break;
 
                 case "5":
                     searchByVendor(userInput);
+                    showReportsScreen(userInput);
                     break;
 
                 case "0":
@@ -53,6 +58,7 @@ public class ReportsScreen {
 
                 default:
                     System.out.println("Invalid option. Please try again.");
+                    showLedgerScreen(userInput);
             }
             return;
         }
